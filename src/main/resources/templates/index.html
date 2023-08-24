@@ -20,6 +20,8 @@
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" th:text="${user}"></a>
+                    <a class="nav-item nav-link active" href="#">Инциденты</a>
+                    <a class="nav-item nav-link active" th:href="@{/accidents/formCreateAccident}">Добавить инцидент</a>
                 </div>
             </div>
         </div>
@@ -29,6 +31,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Нарушение</th>
                 <th scope="col">Комментарий</th>
                 <th scope="col">Адрес</th>
@@ -36,6 +39,11 @@
         </thead>
         <tbody>
             <tr th:each="accident: ${accidents}">
+                <td>
+                    <a th:href="@{|/accidents/formEditAccident?id=${accident.id}|}">
+                        <i class="fa fa-edit"></i><span th:text="${accident.id}"></span>
+                    </a>
+                </td>
                 <td th:text="${accident.name}"></td>
                 <td th:text="${accident.text}"></td>
                 <td th:text="${accident.address}"></td>
