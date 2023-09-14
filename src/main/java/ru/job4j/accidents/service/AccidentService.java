@@ -17,15 +17,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AccidentService {
     private final AccidentRepository accidentRepository;
+
     public List<Accident> getAll() {
         return accidentRepository.getAll();
     }
+
     public void create(Accident accident) {
         accidentRepository.create(accident);
     }
+
     public void update(Accident accident, int id) {
         accidentRepository.update(accident, id);
     }
+
     public Optional<Accident> findById(int id) {
         return accidentRepository.findById(id);
     }

@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
+
+import java.util.Optional;
+
 /**
  * Class AccidentController - Контроллер обработки нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
@@ -23,10 +26,21 @@ public class AccidentController {
     public String viewCreateAccident() {
         return "accidents/createAccident";
     }
+
     @GetMapping("/formEditAccident")
     public String viewEditAccident(@RequestParam int id, Model model) {
-        model.addAttribute("accident", accidents.findById(id).get());
-        return "accidents/editAccident";
+        Optional<Accident> accident = accidents.findById(id);
+        if (accident.isEmpty()) {
+            return "redirect:/accidents/fail";
+        } else {
+            model.addAttribute("accident", accident.get());
+            return "accidents/editAccident";
+        }
+    }
+
+    @GetMapping("/fail")
+    public String fail() {
+        return "accidents/fail";
     }
 
     @PostMapping("/createAccident")
@@ -34,6 +48,7 @@ public class AccidentController {
         accidents.create(accident);
         return "redirect:/index";
     }
+
     @PostMapping("/editAccident")
     public String edit(@ModelAttribute Accident accident, @RequestParam(value = "id") int recId) {
         accidents.update(accident, recId);

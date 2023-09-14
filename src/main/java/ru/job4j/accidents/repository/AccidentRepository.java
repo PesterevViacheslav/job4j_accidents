@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 public interface AccidentRepository {
     List<Accident> getAll();
+
     void create(Accident accident);
+
     void update(Accident accident, int id);
+
     Optional<Accident> findById(int id);
 }

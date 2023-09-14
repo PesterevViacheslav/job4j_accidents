@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiFunction;
 
 /**
  * Class AccidentMem - Репозиторий хранения нарушений in memory. Решение задач уровня Middle.
@@ -19,23 +20,28 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class AccidentMem implements AccidentRepository {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
-    private final AtomicInteger id;
+    private final AtomicInteger id = new AtomicInteger(accidents.size());
+
     public AccidentMem() {
         accidents.put(1, new Accident(1, "accident_1", "text_1", "address_1"));
         accidents.put(2, new Accident(2, "accident_2", "text_2", "address_2"));
-        id = new AtomicInteger(accidents.size());
+        id.set(accidents.size());
     }
+
     public List<Accident> getAll() {
         return new ArrayList<>(accidents.values());
     }
+
     public void create(Accident accident) {
         accident.setId(id.incrementAndGet());
         accidents.put(accident.getId(), accident);
     }
+
     public void update(Accident accident, int id) {
-        accidents.put(id, accident);
+        accidents.computeIfPresent(id, (k, v) -> accident);
     }
+
     public Optional<Accident> findById(int id) {
-        return Optional.of(accidents.get(id));
+        return Optional.ofNullable(accidents.get(id));
     }
 }
