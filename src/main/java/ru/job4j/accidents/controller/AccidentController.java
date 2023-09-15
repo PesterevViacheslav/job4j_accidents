@@ -32,10 +32,9 @@ public class AccidentController {
         Optional<Accident> accident = accidents.findById(id);
         if (accident.isEmpty()) {
             return "redirect:/accidents/fail";
-        } else {
-            model.addAttribute("accident", accident.get());
-            return "accidents/editAccident";
         }
+        model.addAttribute("accident", accident.get());
+        return "accidents/editAccident";
     }
 
     @GetMapping("/fail")

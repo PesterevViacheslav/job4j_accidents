@@ -20,12 +20,11 @@ import java.util.function.BiFunction;
 @Repository
 public class AccidentMem implements AccidentRepository {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
-    private final AtomicInteger id = new AtomicInteger(accidents.size());
+    private final AtomicInteger id = new AtomicInteger(0);
 
     public AccidentMem() {
-        accidents.put(1, new Accident(1, "accident_1", "text_1", "address_1"));
-        accidents.put(2, new Accident(2, "accident_2", "text_2", "address_2"));
-        id.set(accidents.size());
+        create(new Accident(0, "accident_1", "text_1", "address_1"));
+        create(new Accident(0, "accident_2", "text_2", "address_2"));
     }
 
     public List<Accident> getAll() {
@@ -37,8 +36,14 @@ public class AccidentMem implements AccidentRepository {
         accidents.put(accident.getId(), accident);
     }
 
-    public void update(Accident accident, int id) {
-        accidents.computeIfPresent(id, (k, v) -> accident);
+    public boolean update(Accident accident, int id) {
+        return accidents.computeIfPresent(accident.getId(),
+                (k, oldVacancy) -> new Accident(oldVacancy.getId(),
+                                                accident.getName(),
+                                                accident.getText(),
+                                                accident.getAddress()
+                                                )
+        ) != null;
     }
 
     public Optional<Accident> findById(int id) {

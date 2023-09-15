@@ -7,7 +7,7 @@ public interface AccidentRepository {
 
     void create(Accident accident);
 
-    void update(Accident accident, int id);
+    boolean update(Accident accident, int id);
 
     Optional<Accident> findById(int id);
 }
