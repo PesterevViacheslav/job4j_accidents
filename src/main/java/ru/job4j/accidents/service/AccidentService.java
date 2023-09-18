@@ -26,8 +26,8 @@ public class AccidentService {
         accidentRepository.create(accident);
     }
 
-    public void update(Accident accident, int id) {
-        accidentRepository.update(accident, id);
+    public boolean update(Accident accident, int id) {
+        return accidentRepository.update(accident, id);
     }
 
     public Optional<Accident> findById(int id) {

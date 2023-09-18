@@ -31,15 +31,20 @@ public class AccidentController {
     public String viewEditAccident(@RequestParam int id, Model model) {
         Optional<Accident> accident = accidents.findById(id);
         if (accident.isEmpty()) {
-            return "redirect:/accidents/fail";
+            return "redirect:/accidents/errGet";
         }
         model.addAttribute("accident", accident.get());
         return "accidents/editAccident";
     }
 
-    @GetMapping("/fail")
-    public String fail() {
-        return "accidents/fail";
+    @GetMapping("/errGet")
+    public String errGet() {
+        return "accidents/errGet";
+    }
+
+    @GetMapping("/errEdit")
+    public String errEdit() {
+        return "accidents/errEdit";
     }
 
     @PostMapping("/createAccident")
@@ -50,7 +55,9 @@ public class AccidentController {
 
     @PostMapping("/editAccident")
     public String edit(@ModelAttribute Accident accident, @RequestParam(value = "id") int recId) {
-        accidents.update(accident, recId);
+        if (!accidents.update(accident, recId)) {
+            return "redirect:/accidents/errEdit";
+        }
         return "redirect:/index";
     }
 }
