@@ -4,8 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.service.AccidentService;
+import ru.job4j.accidents.service.AccidentTypeService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,15 +25,18 @@ import java.util.Optional;
 @RequestMapping("/accidents")
 public class AccidentController {
     private final AccidentService accidents;
+    private final AccidentTypeService accidentTypeService;
 
     @GetMapping("/formCreateAccident")
-    public String viewCreateAccident() {
+    public String viewCreateAccident(Model model) {
+        model.addAttribute("types", accidentTypeService.getAll());
         return "accidents/createAccident";
     }
 
     @GetMapping("/formEditAccident")
     public String viewEditAccident(@RequestParam int id, Model model) {
         Optional<Accident> accident = accidents.findById(id);
+        model.addAttribute("types", accidentTypeService.getAll());
         if (accident.isEmpty()) {
             return "redirect:/accidents/errGet";
         }

@@ -35,6 +35,7 @@
                 <th scope="col">Нарушение</th>
                 <th scope="col">Комментарий</th>
                 <th scope="col">Адрес</th>
+                <th scope="col">Тип</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@
                 <td th:text="${accident.name}"></td>
                 <td th:text="${accident.text}"></td>
                 <td th:text="${accident.address}"></td>
+                <td th:text="${accident.type.name}"></td>
             </tr>
         </tbody>
     </table>

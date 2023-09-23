@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiFunction;
+import ru.job4j.accidents.model.AccidentType;
 
 /**
  * Class AccidentMem - Репозиторий хранения нарушений in memory. Решение задач уровня Middle.
@@ -23,8 +23,8 @@ public class AccidentMem implements AccidentRepository {
     private final AtomicInteger id = new AtomicInteger(0);
 
     public AccidentMem() {
-        create(new Accident(0, "accident_1", "text_1", "address_1"));
-        create(new Accident(0, "accident_2", "text_2", "address_2"));
+        create(new Accident(0, "accident_1", "text_1", "address_1", new AccidentType(1, "Две машины")));
+        create(new Accident(0, "accident_2", "text_2", "address_2", new AccidentType(2, "Машина и человек")));
     }
 
     public List<Accident> getAll() {
@@ -41,7 +41,8 @@ public class AccidentMem implements AccidentRepository {
                 (k, oldVacancy) -> new Accident(oldVacancy.getId(),
                                                 accident.getName(),
                                                 accident.getText(),
-                                                accident.getAddress()
+                                                accident.getAddress(),
+                                                accident.getType()
                                                 )
         ) != null;
     }

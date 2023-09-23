@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 /**
- * Class Accident - Нарушение. Решение задач уровня Middle.
+ * Class AccidentType - Тип нарушения. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
  *
  * @author Viacheslav Pesterev (pesterevvv@gmail.com)
@@ -15,11 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accident {
+public class AccidentType {
     @EqualsAndHashCode.Include
     private int id;
+
     private String name;
-    private String text;
-    private String address;
-    private AccidentType type;
 }

@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.AccidentRepository;
+import ru.job4j.accidents.repository.AccidentTypeRepository;
+
 import java.util.List;
 import java.util.Optional;
 /**
@@ -17,16 +19,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AccidentService {
     private final AccidentRepository accidentRepository;
+    private final AccidentTypeRepository accidentTypeRepository;
 
     public List<Accident> getAll() {
         return accidentRepository.getAll();
     }
 
     public void create(Accident accident) {
+        accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
         accidentRepository.create(accident);
     }
 
     public boolean update(Accident accident, int id) {
+        accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
         return accidentRepository.update(accident, id);
     }
 
