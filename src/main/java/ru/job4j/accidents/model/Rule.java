@@ -3,9 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import java.util.Set;
 /**
- * Class Accident - Нарушение. Решение задач уровня Middle.
+ * Class Rule - Статья нарушения. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
  *
  * @author Viacheslav Pesterev (pesterevvv@gmail.com)
@@ -16,12 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accident {
+public class Rule {
     @EqualsAndHashCode.Include
     private int id;
     private String name;
-    private String text;
-    private String address;
-    private AccidentType type;
-    private Set<Rule> rules;
 }

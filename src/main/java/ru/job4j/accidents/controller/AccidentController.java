@@ -4,14 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.model.AccidentType;
+import ru.job4j.accidents.service.AccidentRuleService;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 /**
  * Class AccidentController - Контроллер обработки нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
@@ -26,10 +23,12 @@ import java.util.Optional;
 public class AccidentController {
     private final AccidentService accidents;
     private final AccidentTypeService accidentTypeService;
+    private final AccidentRuleService accidentRuleService;
 
     @GetMapping("/formCreateAccident")
     public String viewCreateAccident(Model model) {
         model.addAttribute("types", accidentTypeService.getAll());
+        model.addAttribute("rules", accidentRuleService.getAll());
         return "accidents/createAccident";
     }
 
@@ -37,6 +36,7 @@ public class AccidentController {
     public String viewEditAccident(@RequestParam int id, Model model) {
         Optional<Accident> accident = accidents.findById(id);
         model.addAttribute("types", accidentTypeService.getAll());
+        model.addAttribute("rules", accidentRuleService.getAll());
         if (accident.isEmpty()) {
             return "redirect:/accidents/errGet";
         }
@@ -55,14 +55,17 @@ public class AccidentController {
     }
 
     @PostMapping("/createAccident")
-    public String create(@ModelAttribute Accident accident) {
-        accidents.create(accident);
+    public String create(@ModelAttribute Accident accident,
+                         @RequestParam(value = "rIds", required = false) List<Integer> rIds) {
+        accidents.create(accident, rIds);
         return "redirect:/index";
     }
 
     @PostMapping("/editAccident")
-    public String edit(@ModelAttribute Accident accident, @RequestParam(value = "id") int recId) {
-        if (!accidents.update(accident, recId)) {
+    public String edit(@ModelAttribute Accident accident,
+                       @RequestParam(value = "id") int recId,
+                       @RequestParam(value = "rIds", required = false) List<Integer> rIds) {
+        if (!accidents.update(accident, recId, rIds)) {
             return "redirect:/accidents/errEdit";
         }
         return "redirect:/index";
