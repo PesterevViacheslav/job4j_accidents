@@ -30,12 +30,11 @@ public class AccidentRuleMem implements AccidentRuleRepository {
     public Set<Rule> getRulesByAccidentIds(List<Integer> rIds) {
         Set<Rule> result = new HashSet<>();
         if (rIds != null) {
-            for (Integer id : rIds) {
-                Rule rule = rules.get(id);
-                if (rule != null) {
-                    result.add(rule);
-                }
-            }
+            rIds.stream()
+                    .filter((id) -> rules.get(id) != null)
+                    .forEach((rId) -> {
+                        result.add(rules.get(rId));
+                    });
         }
         return result;
     }
