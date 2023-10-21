@@ -32,9 +32,6 @@
                 <db.password>password</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
     </profiles>
     <build>
