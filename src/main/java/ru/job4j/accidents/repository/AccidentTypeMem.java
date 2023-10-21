@@ -6,6 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+/**
+ * Class AccidentTypeMem - Репозиторий хранения типов in memory. Решение задач уровня Middle.
+ * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
+ *
+ * @author Viacheslav Pesterev (pesterevvv@gmail.com)
+ * @since 15.08.2023
+ * @version 1
+ */
 @Repository
 public class AccidentTypeMem implements AccidentTypeRepository {
     private final Map<Integer, AccidentType> types = new ConcurrentHashMap<>();

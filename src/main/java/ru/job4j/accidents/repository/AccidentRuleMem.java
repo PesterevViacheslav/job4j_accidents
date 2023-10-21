@@ -1,9 +1,9 @@
 package ru.job4j.accidents.repository;
+import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Repository;
 /**
  * Class AccidentMem - Репозиторий хранения статей нарушений in memory. Решение задач уровня Middle.
@@ -29,7 +29,7 @@ public class AccidentRuleMem implements AccidentRuleRepository {
     }
 
     @Override
-    public Set<Rule> getRulesByAccidentIds(List<Integer> rIds) {
+    public Set<Rule> getAccidentRule(List<Integer> rIds) {
         Set<Rule> result = new HashSet<>();
         if (rIds != null) {
             result = rIds.stream()

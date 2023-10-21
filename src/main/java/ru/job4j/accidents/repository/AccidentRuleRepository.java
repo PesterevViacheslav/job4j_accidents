@@ -5,5 +5,5 @@ import java.util.Set;
 public interface AccidentRuleRepository {
     List<Rule> getAll();
 
-    Set<Rule> getRulesByAccidentIds(List<Integer> rIds);
+    Set<Rule> getAccidentRule(List<Integer> rIds);
 }

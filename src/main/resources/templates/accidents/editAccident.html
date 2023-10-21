@@ -31,12 +31,12 @@
                 <form th:action="@{/accidents/editAccident}" method="POST" th:object="${accident}">
                     <input type="hidden" name="id" th:value="*{id}"/>
                     <div class="form-group">
-                        <label for="name">Название</label>
-                        <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
+                        <label for="title">Название</label>
+                        <input type="text" class="form-control" name="title" id="title" th:field="*{title}">
                     </div>
                     <div class="form-group">
-                        <label for="text">Комментарий</label>
-                        <input type="text" class="form-control" name="text" id="text" th:field="*{text}">
+                        <label for="dsc">Комментарий</label>
+                        <input type="text" class="form-control" name="dsc" id="dsc" th:field="*{dsc}">
                     </div>
                     <div class="form-group">
                         <label for="address">Адрес</label>
@@ -46,7 +46,7 @@
                         <label for="type.id">Тип</label>
                         <select class="form-control" id="type.id" name="type.id">
                             <option th:each="type: ${types}"
-                                    th:text="${type.name}"
+                                    th:text="${type.title}"
                                     th:value="${type.id}"></option>
                         </select>
                     </div>
@@ -54,7 +54,7 @@
                         <label for="type.id" name="rIds">Статья</label>
                         <select class="form-control" id="rIds" name="rIds" multiple>
                             <option th:each="rule: ${rules}"
-                                    th:text="${rule.name}"
+                                    th:text="${rule.title}"
                                     th:value="${rule.id}"></option>
                         </select>
                     </div>

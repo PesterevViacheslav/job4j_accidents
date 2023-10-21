@@ -2,9 +2,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.repository.AccidentRepository;
-import ru.job4j.accidents.repository.AccidentRuleRepository;
-import ru.job4j.accidents.repository.AccidentTypeRepository;
+import ru.job4j.accidents.repository.*;
 import java.util.List;
 import java.util.Optional;
 /**
@@ -18,9 +16,9 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AccidentService {
-    private final AccidentRepository accidentRepository;
-    private final AccidentTypeRepository accidentTypeRepository;
-    private final AccidentRuleRepository accidentRuleRepository;
+    private final AccidentJdbcTemplate accidentRepository;
+    private final AccidentTypeJdbcTemplate accidentTypeRepository;
+    private final AccidentRuleJdbcTemplate accidentRuleRepository;
 
     public List<Accident> getAll() {
         return accidentRepository.getAll();
@@ -28,13 +26,13 @@ public class AccidentService {
 
     public void create(Accident accident, List<Integer> rIds) {
         accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
-        accident.setRules(accidentRuleRepository.getRulesByAccidentIds(rIds));
+        accident.setRules(accidentRuleRepository.getAccidentRule(rIds));
         accidentRepository.create(accident);
     }
 
     public boolean update(Accident accident, int id, List<Integer> rIds) {
         accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
-        accident.setRules(accidentRuleRepository.getRulesByAccidentIds(rIds));
+        accident.setRules(accidentRuleRepository.getAccidentRule(rIds));
         return accidentRepository.update(accident, id);
     }
 

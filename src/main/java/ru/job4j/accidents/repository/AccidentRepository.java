@@ -5,7 +5,7 @@ import java.util.Optional;
 public interface AccidentRepository {
     List<Accident> getAll();
 
-    void create(Accident accident);
+    Accident create(Accident accident);
 
     boolean update(Accident accident, int id);
 
