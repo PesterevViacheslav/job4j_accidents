@@ -102,18 +102,41 @@ public class AccidentJdbcTemplate {
     }
 
     public void setAccidentRule(Accident accident) {
-        jdbc.execute(
-                con -> {
-                    CallableStatement cs = con.prepareCall("{call accident_rule_set(?, ?::JSON)}");
-                    cs.setInt(1, accident.getId());
-                    Gson gson = new Gson();
-                    cs.setString(2, gson.toJson(accident.getRules()));
-                    return cs;
-                },
-                (CallableStatementCallback) cs -> {
-                    cs.execute();
-                    return null;
-                }
+        Gson gson = new Gson();
+        jdbc.update("WITH val AS("
+                        + "    SELECT ? AS acc_id"
+                        + "    ), j AS (\n"
+                        + "        SELECT\n"
+                        + "            (res ->> 'id')::INT AS r_id\n"
+                        + "        FROM json_array_elements(?::JSON) v(res)\n"
+                        + "    ), dt AS (\n"
+                        + "        SELECT\n"
+                        + "             r.rule_id\n"
+                        + "            ,j.r_id\n"
+                        + "        FROM j CROSS JOIN val\n"
+                        + "        FULL OUTER JOIN accident_rule r ON r.rule_id = j.r_id\n"
+                        + "                                       AND r.accident_id = val.acc_id\n"
+                        + "        WHERE COALESCE(r.accident_id, val.acc_id) = val.acc_id\n"
+                        + "          AND (r.rule_id IS NULL OR j.r_id IS NULL)\n"
+                        + "    ), del AS (\n"
+                        + "        DELETE FROM accident_rule ar\n"
+                        + "              WHERE ar.accident_id = (SELECT acc_id FROM val)\n"
+                        + "                AND ar.rule_id IN (SELECT dt.rule_id\n"
+                        + "                                     FROM dt\n"
+                        + "                                    WHERE dt.rule_id IS NOT NULL\n"
+                        + "                )\n"
+                        + "        RETURNING ar.id\n"
+                        + "    )\n"
+                        + "        INSERT INTO accident_rule(accident_id, rule_id)\n"
+                        + "            (SELECT\n"
+                        + "                  val.acc_id AS accident_id\n"
+                        + "                 ,dt.r_id\n"
+                        + "             FROM dt CROSS JOIN val\n"
+                        + "            WHERE dt.r_id IS NOT NULL\n"
+                        + "            )\n"
+                        + "",
+                         accident.getId(),
+                         gson.toJson(accident.getRules())
         );
     }
 }

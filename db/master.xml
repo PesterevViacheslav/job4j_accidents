@@ -13,5 +13,4 @@
     <include file="scripts/003_ddl_create_table_rule.sql" relativeToChangelogFile="true"/>
     <include file="scripts/004_ddl_create_table_accident_rule.sql" relativeToChangelogFile="true"/>
     <include file="scripts/005_dml_insert_init_data.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/006_ddl_create_function_accident_rule_set.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
