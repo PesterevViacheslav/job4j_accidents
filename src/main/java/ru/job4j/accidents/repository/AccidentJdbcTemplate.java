@@ -7,10 +7,8 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Rule;
-import com.google.gson.Gson;
 import java.sql.*;
 import java.util.*;
-
 /**
  * Class AccidentJdbcTemplate - Репозиторий хранения нарушений в БД. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

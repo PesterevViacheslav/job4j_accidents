@@ -2,6 +2,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
+import ru.job4j.accidents.repository.AccidentRuleHibernate;
 import ru.job4j.accidents.repository.AccidentRuleJdbcTemplate;
 import java.util.List;
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AccidentRuleService {
-    private final AccidentRuleJdbcTemplate accidentRuleRepository;
+    private final AccidentRuleHibernate accidentRuleRepository;
 
     public List<Rule> getAll() {
         return accidentRuleRepository.getAll();
