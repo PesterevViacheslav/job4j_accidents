@@ -2,9 +2,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.AccidentRuleHibernate;
-import ru.job4j.accidents.repository.AccidentRuleJdbcTemplate;
-import java.util.List;
+import ru.job4j.accidents.repository.AccidentRuleData;
 /**
  * Class AccidentRuleService - Сервис обработки статей нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
@@ -16,9 +14,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AccidentRuleService {
-    private final AccidentRuleHibernate accidentRuleRepository;
+    private final AccidentRuleData accidentRuleRepository;
 
-    public List<Rule> getAll() {
-        return accidentRuleRepository.getAll();
+    public Iterable<Rule> getAll() {
+        return accidentRuleRepository.findAll();
     }
 }

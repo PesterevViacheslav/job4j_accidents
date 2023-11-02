@@ -2,11 +2,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.repository.AccidentRuleHibernate;
-import ru.job4j.accidents.repository.AccidentTypeHibernate;
-import ru.job4j.accidents.repository.AccidentTypeJdbcTemplate;
-import ru.job4j.accidents.repository.AccidentTypeRepository;
-import java.util.List;
+import ru.job4j.accidents.repository.*;
 /**
  * Class AccidentTypeService - Сервис обработки типов нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
@@ -18,9 +14,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AccidentTypeService {
-    private final AccidentTypeHibernate accidentTypeJdbcTemplate;
+    private final AccidentTypeData accidentTypeJdbcTemplate;
 
-    public List<AccidentType> getAll() {
-        return accidentTypeJdbcTemplate.getAll();
+    public Iterable<AccidentType> getAll() {
+        return accidentTypeJdbcTemplate.findAll();
     }
 }

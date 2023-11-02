@@ -3,8 +3,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.*;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 /**
  * Class AccidentService - Сервис обработки нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
@@ -16,24 +15,25 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AccidentService {
-    private final AccidentHibernate accidentRepository;
-    private final AccidentTypeJdbcTemplate accidentTypeRepository;
-    private final AccidentRuleJdbcTemplate accidentRuleRepository;
+    private final AccidentData accidentRepository;
+    private final AccidentTypeData accidentTypeRepository;
+    private final AccidentRuleData accidentRuleRepository;
 
-    public List<Accident> getAll() {
-        return accidentRepository.getAll();
+    public Iterable<Accident> getAll() {
+        return accidentRepository.findAll();
     }
 
     public void create(Accident accident, List<Integer> rIds) {
         accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
-        accident.setRules(accidentRuleRepository.getAccidentRule(rIds));
-        accidentRepository.create(accident);
+        accident.setRules(new HashSet<>((Collection) accidentRuleRepository.findAllById(rIds)));
+        accidentRepository.save(accident);
     }
 
     public boolean update(Accident accident, int id, List<Integer> rIds) {
         accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
-        accident.setRules(accidentRuleRepository.getAccidentRule(rIds));
-        return accidentRepository.update(accident, id);
+        accident.setRules(new HashSet<>((Collection) accidentRuleRepository.findAllById(rIds)));
+        accidentRepository.save(accident);
+        return true;
     }
 
     public Optional<Accident> findById(int id) {
