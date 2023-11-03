@@ -1,4 +1,5 @@
 package ru.job4j.accidents.repository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -9,6 +10,7 @@ import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Rule;
 import java.sql.*;
 import java.util.*;
+
 /**
  * Class AccidentJdbcTemplate - Репозиторий хранения нарушений в БД. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

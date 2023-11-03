@@ -1,4 +1,5 @@
 package ru.job4j.accidents.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -6,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  * Class Accident - Нарушение. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

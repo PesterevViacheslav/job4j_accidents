@@ -1,10 +1,11 @@
 package ru.job4j.accidents.repository;
-import ru.job4j.accidents.model.Accident;
+
 import ru.job4j.accidents.model.Rule;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
+
 /**
  * Class AccidentMem - Репозиторий хранения статей нарушений in memory. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

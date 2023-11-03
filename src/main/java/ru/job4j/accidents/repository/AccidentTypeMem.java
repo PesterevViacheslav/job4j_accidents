@@ -1,4 +1,5 @@
 package ru.job4j.accidents.repository;
+
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 import java.util.ArrayList;
@@ -6,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Class AccidentTypeMem - Репозиторий хранения типов in memory. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

@@ -1,9 +1,11 @@
 package ru.job4j.accidents.service;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.*;
 import java.util.*;
+
 /**
  * Class AccidentService - Сервис обработки нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
@@ -19,7 +21,7 @@ public class AccidentService {
     private final AccidentTypeData accidentTypeRepository;
     private final AccidentRuleData accidentRuleRepository;
 
-    public Iterable<Accident> getAll() {
+    public List<Accident> getAll() {
         return accidentRepository.findAll();
     }
 

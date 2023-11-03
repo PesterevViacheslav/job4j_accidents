@@ -1,4 +1,5 @@
 package ru.job4j.accidents.repository;
+
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
 @AllArgsConstructor
 @Component
 public class CrudRepository {

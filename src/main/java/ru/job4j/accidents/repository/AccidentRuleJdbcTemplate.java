@@ -1,17 +1,13 @@
 package ru.job4j.accidents.repository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
-
-import java.sql.Array;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.*;
+
 /**
  * Class AccidentRuleJdbcTemplate - Репозиторий хранения статей нарушений в БД. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

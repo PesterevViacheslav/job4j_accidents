@@ -1,4 +1,5 @@
 package ru.job4j.accidents.controller;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Class AccidentController - Контроллер обработки нарушений. Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC

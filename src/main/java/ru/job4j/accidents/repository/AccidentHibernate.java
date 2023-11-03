@@ -1,10 +1,12 @@
 package ru.job4j.accidents.repository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 /**
  * Class AccidentHibernate - Репозиторий хранения нарушений в БД (Hibernate). Решение задач уровня Middle.
  * Категория : 3.5. Spring boot. Тема : 3.4.2. MVC
