@@ -19,7 +19,7 @@
             <a class="navbar-brand" href="#">Автонарушители</a>
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" th:text="${user}"></a>
+                    <a class="nav-item nav-link active" th:text="${user.username}"></a>
                     <a class="nav-item nav-link active" href="#">Инциденты</a>
                     <a class="nav-item nav-link active" th:href="@{/accidents/formCreateAccident}">Добавить инцидент</a>
                 </div>
