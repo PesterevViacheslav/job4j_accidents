@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 public class AccidentControllerTest {
 
     @Autowired

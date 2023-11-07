@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 public class IndexControllerTest {
 
     @Autowired
